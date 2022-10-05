@@ -105,13 +105,14 @@ pub mod tests {
     fn tokenization() {
         use tokenizer::Token;
 
-        let input = "(henlo (x 32 32.32))".to_string();
+        let input = "(henlo '(x 32 32.32))".to_string();
         let tokens = tokenizer::tokenize(input.lines());
         assert_eq!(
             tokens,
             vec![
                 Token::LParen,
                 Token::Symbol("henlo".to_string()),
+                Token::Quote,
                 Token::LParen,
                 Token::Symbol("x".to_string()),
                 Token::Integer(32i32),
