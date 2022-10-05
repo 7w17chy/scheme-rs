@@ -8,7 +8,7 @@ fn push_if_list(object: &mut Expression, value: Box<dyn Object>) {
     }
 }
 
-pub fn parse(tokens: Vec<Token>) -> Result<Vec<Box<dyn Object>>> {
+pub fn parse(tokens: Vec<Token>) -> Result<Vec<Expression>> {
     let mut ast: Vec<Expression> = Vec::with_capacity(tokens.len());
     let mut list_index = 0usize;
     ensure!(
@@ -35,5 +35,5 @@ pub fn parse(tokens: Vec<Token>) -> Result<Vec<Box<dyn Object>>> {
         }
     }
 
-    unimplemented!();
+    Ok(ast)
 }
