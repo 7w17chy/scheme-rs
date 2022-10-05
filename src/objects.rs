@@ -4,6 +4,7 @@ use std::convert::AsRef;
 // TODO: add `eval` method
 pub trait Object {}
 
+#[derive(Debug, PartialEq)]
 pub enum Atom {
     Symbol(String),
     Float(f32),
@@ -12,6 +13,7 @@ pub enum Atom {
 
 impl Object for Atom {}
 
+#[derive(Debug, PartialEq)]
 pub enum Expression {
     Atom(Atom),
     List(Vec<Box<dyn Object>>),

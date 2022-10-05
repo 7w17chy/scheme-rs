@@ -37,3 +37,26 @@ pub fn parse(tokens: Vec<Token>) -> Result<Vec<Expression>> {
 
     Ok(ast)
 }
+
+#[cfg(test)]
+pub mod tests {
+    use super::*;
+    use crate::tokenizer::{self, Token};
+
+    #[test]
+    fn basic_parsing() {
+        let input = "(henlo (x 32 32.32))".to_string();
+        let tokens = tokenizer::tokenize(input.lines());
+        let parsed = parse(tokens).unwrap();
+
+        let checked = vec![Box::new(Expression::List(vec![
+            Box::new(Atom::Symbol("henlo".to_string())),
+            Box::new(Expression::List(vec![
+                Box::new(Atom::Symbol("x".to_string())),
+                Box::new(Atom::Integer(32)),
+            ])),
+        ]))];
+
+        assert_eq!(parsed, checked);
+    }
+}
